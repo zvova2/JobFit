@@ -35,22 +35,22 @@ namespace JobFit
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.matchpercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.candidatenameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.joborderidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matchBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.jobFitDataSet = new JobFit.JobFitDataSet();
             this.matchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nEWJobFitDataSet = new JobFit.NEWJobFitDataSet();
             this.matchTableAdapter = new JobFit.NEWJobFitDataSetTableAdapters.matchTableAdapter();
             this.editCandidate = new System.Windows.Forms.Button();
-            this.jobFitDataSet = new JobFit.JobFitDataSet();
-            this.matchBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.matchTableAdapter1 = new JobFit.JobFitDataSetTableAdapters.matchTableAdapter();
+            this.matchpercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.candidatenameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.joborderidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.jobFitDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nEWJobFitDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jobFitDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // AddCandidate
@@ -107,24 +107,18 @@ namespace JobFit
             this.dataGridView1.Size = new System.Drawing.Size(515, 686);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
-            // matchpercentageDataGridViewTextBoxColumn
+            // matchBindingSource1
             // 
-            this.matchpercentageDataGridViewTextBoxColumn.DataPropertyName = "match_percentage";
-            this.matchpercentageDataGridViewTextBoxColumn.HeaderText = "match_percentage";
-            this.matchpercentageDataGridViewTextBoxColumn.Name = "matchpercentageDataGridViewTextBoxColumn";
+            this.matchBindingSource1.DataMember = "match";
+            this.matchBindingSource1.DataSource = this.jobFitDataSet;
             // 
-            // candidatenameDataGridViewTextBoxColumn
+            // jobFitDataSet
             // 
-            this.candidatenameDataGridViewTextBoxColumn.DataPropertyName = "candidate_name";
-            this.candidatenameDataGridViewTextBoxColumn.HeaderText = "candidate_name";
-            this.candidatenameDataGridViewTextBoxColumn.Name = "candidatenameDataGridViewTextBoxColumn";
-            // 
-            // joborderidDataGridViewTextBoxColumn
-            // 
-            this.joborderidDataGridViewTextBoxColumn.DataPropertyName = "joborder_id";
-            this.joborderidDataGridViewTextBoxColumn.HeaderText = "joborder_id";
-            this.joborderidDataGridViewTextBoxColumn.Name = "joborderidDataGridViewTextBoxColumn";
+            this.jobFitDataSet.DataSetName = "JobFitDataSet";
+            this.jobFitDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // matchBindingSource
             // 
@@ -150,19 +144,27 @@ namespace JobFit
             this.editCandidate.UseVisualStyleBackColor = true;
             this.editCandidate.Click += new System.EventHandler(this.editCandidate_Click);
             // 
-            // jobFitDataSet
-            // 
-            this.jobFitDataSet.DataSetName = "JobFitDataSet";
-            this.jobFitDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // matchBindingSource1
-            // 
-            this.matchBindingSource1.DataMember = "match";
-            this.matchBindingSource1.DataSource = this.jobFitDataSet;
-            // 
             // matchTableAdapter1
             // 
             this.matchTableAdapter1.ClearBeforeFill = true;
+            // 
+            // matchpercentageDataGridViewTextBoxColumn
+            // 
+            this.matchpercentageDataGridViewTextBoxColumn.DataPropertyName = "match_percentage";
+            this.matchpercentageDataGridViewTextBoxColumn.HeaderText = "match (%)";
+            this.matchpercentageDataGridViewTextBoxColumn.Name = "matchpercentageDataGridViewTextBoxColumn";
+            // 
+            // candidatenameDataGridViewTextBoxColumn
+            // 
+            this.candidatenameDataGridViewTextBoxColumn.DataPropertyName = "candidate_name";
+            this.candidatenameDataGridViewTextBoxColumn.HeaderText = "Candidate Name";
+            this.candidatenameDataGridViewTextBoxColumn.Name = "candidatenameDataGridViewTextBoxColumn";
+            // 
+            // joborderidDataGridViewTextBoxColumn
+            // 
+            this.joborderidDataGridViewTextBoxColumn.DataPropertyName = "joborder_id";
+            this.joborderidDataGridViewTextBoxColumn.HeaderText = "Job Order Number";
+            this.joborderidDataGridViewTextBoxColumn.Name = "joborderidDataGridViewTextBoxColumn";
             // 
             // MainForm
             // 
@@ -181,10 +183,10 @@ namespace JobFit
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.jobFitDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nEWJobFitDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jobFitDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.matchBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,12 +202,12 @@ namespace JobFit
         private NEWJobFitDataSet nEWJobFitDataSet;
         private System.Windows.Forms.BindingSource matchBindingSource;
         private NEWJobFitDataSetTableAdapters.matchTableAdapter matchTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn matchpercentageDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn candidatenameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn joborderidDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button editCandidate;
         private JobFitDataSet jobFitDataSet;
         private System.Windows.Forms.BindingSource matchBindingSource1;
         private JobFitDataSetTableAdapters.matchTableAdapter matchTableAdapter1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matchpercentageDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn candidatenameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn joborderidDataGridViewTextBoxColumn;
     }
 }

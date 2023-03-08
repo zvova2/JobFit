@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace JobFit
 {
@@ -12,10 +13,12 @@ namespace JobFit
         {
             InitializeComponent();
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // ваши действия здесь
         }
+
         private void AddCandidate_Click(object sender, EventArgs e)
         {
             CandidateForm candidateForm = new CandidateForm();
@@ -24,6 +27,19 @@ namespace JobFit
         }
 
         private void CandidateForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DatabaseFunctions.UpdateMatchTable();
+            RefreshDataGridView();
+        }
+
+        private void editCandidate_Click(object sender, EventArgs e)
+        {
+            EditCandidate EditCandidate = new EditCandidate();
+            EditCandidate.FormClosed += EditCandidate_FormClosed;
+            EditCandidate.ShowDialog();
+        }
+
+        private void EditCandidate_FormClosed(object sender, FormClosedEventArgs e)
         {
             DatabaseFunctions.UpdateMatchTable();
             RefreshDataGridView();
@@ -73,10 +89,26 @@ namespace JobFit
             RefreshDataGridView();
         }
 
-        private void editCandidate_Click(object sender, EventArgs e)
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            EditCandidate EditCandidate = new EditCandidate();
-            EditCandidate.ShowDialog();
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "matchpercentageDataGridViewTextBoxColumn")
+            {
+                if (e.Value != null && float.TryParse(e.Value.ToString(), out float percentage))
+
+                {
+                    e.Value = (percentage * 100).ToString("0.##") + "%";
+
+                    e.FormattingApplied = true;
+                }
+            }
         }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+
+        }
+
+
+
     }
 }

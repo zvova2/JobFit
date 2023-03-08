@@ -17,6 +17,7 @@ namespace JobFit
         public EditCandidate()
         {
             InitializeComponent();
+          
             this.candidatesDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.candidatesDataGridView_CellValueChanged);
 
         }
@@ -63,14 +64,20 @@ namespace JobFit
             int selectedId = (int)candidatesDataGridView.SelectedRows[0].Cells[0].Value;
 
             // Формируем запрос DELETE к базе данных
-            string query = "DELETE FROM candidate " +
-                           "WHERE id = " + selectedId;
-
-            // Выполняем запрос
+            string deleteCandidateQuery = "DELETE FROM candidate " +
+                              "WHERE id = " + selectedId;
+            string deleteMatchQuery = "DELETE FROM [match] WHERE [candidate_id] = @candidate_id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);
                 connection.Open();
+                SqlCommand command = new SqlCommand(deleteMatchQuery, connection);
+                command.Parameters.AddWithValue("@candidate_id", selectedId);
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show($"Удалено {rowsAffected} строк из таблицы match");
+                }
+                command = new SqlCommand(deleteCandidateQuery, connection);
                 command.ExecuteNonQuery();
             }
 
