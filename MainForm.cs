@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Data;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace JobFit
 {
@@ -12,17 +12,21 @@ namespace JobFit
         {
             InitializeComponent();
         }
-        public enum DataGridViewColumnSortMode
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Automatic,
-            Programmatic,
-            NotSortable
+            // ваши действия здесь
         }
-
         private void AddCandidate_Click(object sender, EventArgs e)
         {
             CandidateForm candidateForm = new CandidateForm();
+            candidateForm.FormClosed += CandidateForm_FormClosed;
             candidateForm.ShowDialog();
+        }
+
+        private void CandidateForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DatabaseFunctions.UpdateMatchTable();
+            RefreshDataGridView();
         }
 
         private void AddJobOrder_Click(object sender, EventArgs e)
@@ -30,17 +34,18 @@ namespace JobFit
             JobOrderForm jobOrderForm = new JobOrderForm();
             jobOrderForm.ShowDialog();
         }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // загрузить данные в таблицу, используя текущее значение ползунка
-            trackBar1_Scroll(sender, e);
             DatabaseFunctions.UpdateMatchTable();
+            this.matchTableAdapter1.Fill(this.jobFitDataSet.match);
+            RefreshDataGridView();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void RefreshDataGridView()
         {
-            int value = trackBar1.Value;
-            double matchPercentage = value * 0.05;
+            DatabaseFunctions.UpdateMatchTable();
+            double matchPercentage = trackBar1.Value * 0.05;
 
             label1.Text = matchPercentage.ToString();
 
@@ -60,11 +65,18 @@ namespace JobFit
 
                 dataGridView1.DataSource = table;
                 dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
-
-
             }
         }
 
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            RefreshDataGridView();
+        }
 
+        private void editCandidate_Click(object sender, EventArgs e)
+        {
+            EditCandidate EditCandidate = new EditCandidate();
+            EditCandidate.ShowDialog();
+        }
     }
 }

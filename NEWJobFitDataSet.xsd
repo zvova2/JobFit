@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NEWJobFitDataSet" targetNamespace="http://tempuri.org/NEWJobFitDataSet.xsd" xmlns:mstns="http://tempuri.org/NEWJobFitDataSet.xsd" xmlns="http://tempuri.org/NEWJobFitDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="JobFitConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="JobFitConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.JobFit.Properties.Settings.GlobalReference.Default.JobFitConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="matchTableAdapter" GeneratorDataComponentClassName="matchTableAdapter" Name="match" UserDataComponentName="matchTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="JobFitConnectionString1 (Settings)" DbObjectName="JobFit.dbo.match" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT joborder_id, match_percentage, candidate_name FROM dbo.match</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="joborder_id" DataSetColumn="joborder_id" />
+              <Mapping SourceColumn="match_percentage" DataSetColumn="match_percentage" />
+              <Mapping SourceColumn="candidate_name" DataSetColumn="candidate_name" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="NEWJobFitDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="NEWJobFitDataSet" msprop:Generator_UserDSName="NEWJobFitDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="match" msprop:Generator_TableClassName="matchDataTable" msprop:Generator_TableVarName="tablematch" msprop:Generator_TablePropName="match" msprop:Generator_RowDeletingName="matchRowDeleting" msprop:Generator_RowChangingName="matchRowChanging" msprop:Generator_RowEvHandlerName="matchRowChangeEventHandler" msprop:Generator_RowDeletedName="matchRowDeleted" msprop:Generator_UserTableName="match" msprop:Generator_RowChangedName="matchRowChanged" msprop:Generator_RowEvArgName="matchRowChangeEvent" msprop:Generator_RowClassName="matchRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="joborder_id" msprop:Generator_ColumnVarNameInTable="columnjoborder_id" msprop:Generator_ColumnPropNameInRow="joborder_id" msprop:Generator_ColumnPropNameInTable="joborder_idColumn" msprop:Generator_UserColumnName="joborder_id" type="xs:int" />
+              <xs:element name="match_percentage" msprop:Generator_ColumnVarNameInTable="columnmatch_percentage" msprop:Generator_ColumnPropNameInRow="match_percentage" msprop:Generator_ColumnPropNameInTable="match_percentageColumn" msprop:Generator_UserColumnName="match_percentage" type="xs:double" />
+              <xs:element name="candidate_name" msprop:Generator_ColumnVarNameInTable="columncandidate_name" msprop:Generator_ColumnPropNameInRow="candidate_name" msprop:Generator_ColumnPropNameInTable="candidate_nameColumn" msprop:Generator_UserColumnName="candidate_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
